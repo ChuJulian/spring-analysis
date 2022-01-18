@@ -112,8 +112,9 @@ public interface Log {
 	 * when the log level is more than trace.
 	 * @return true if trace is enabled in the underlying logger.
 	 */
+
 	/**
-	 * 当前是否启用了跟踪日志记录？
+	 * 当前是否启用了跟踪日志记录.
 	 * 当日志级别超过跟踪时，调用此方法以防止必须执行昂贵的操作（例如， String连接）。
 	 * 回报：
 	 * 如果在底层记录器中启用了跟踪，则为 true。
