@@ -129,7 +129,7 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 		try {
 			// 创建DefaultListableBeanFactory对象
 			DefaultListableBeanFactory beanFactory = createBeanFactory();
-			// 为了序列化指定id，可以从id反序列化到beanFactory对象
+			// 为了序列化指定id，可以从id反序列化到beanFactory对象（每个容器重新启动是都会给一个唯一标识）
 			beanFactory.setSerializationId(getId());
 			// 定制beanFactory，设置相关属性，包括是否允许覆盖同名称的不同定义的对象以及循环依赖
 			customizeBeanFactory(beanFactory);
@@ -199,6 +199,11 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 	 * @see org.springframework.beans.factory.support.DefaultListableBeanFactory#setAllowEagerClassLoading
 	 * @see org.springframework.beans.factory.support.DefaultListableBeanFactory#setAllowCircularReferences
 	 * @see org.springframework.beans.factory.support.DefaultListableBeanFactory#setAllowRawInjectionDespiteWrapping
+	 */
+	/**
+	 * 为此上下文创建一个内部 bean 工厂。 为每次refresh()尝试调用。
+	 * 默认实现创建一个DefaultListableBeanFactory ，并将此上下文父级的内部 bean 工厂作为父 bean 工厂。 可以在子类中重写，例如自定义 DefaultListableBeanFactory 的设置。
+	 * @return
 	 */
 	protected DefaultListableBeanFactory createBeanFactory() {
 		return new DefaultListableBeanFactory(getInternalParentBeanFactory());
